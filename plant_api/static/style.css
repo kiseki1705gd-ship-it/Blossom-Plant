@@ -1,6 +1,12 @@
 body{
 
-font-family:-apple-system,BlinkMacSystemFont,"SF Pro Display",sans-serif;
+font-family:
+"Sukhumvit Set",
+-apple-system,
+BlinkMacSystemFont,
+"SF Pro Display",
+system-ui,
+sans-serif;
 
 background:#f2f4f7;
 
@@ -10,9 +16,11 @@ display:flex;
 align-items:center;
 justify-content:center;
 
+margin:0;
+
 }
 
-/* card */
+/* กล่องหลัก */
 
 .card{
 
@@ -30,7 +38,7 @@ box-shadow:
 
 }
 
-/* title */
+/* หัวข้อ */
 
 h1{
 
@@ -42,9 +50,11 @@ font-weight:600;
 
 color:#1c1c1e;
 
+letter-spacing:-0.3px;
+
 }
 
-/* table */
+/* ตาราง */
 
 table{
 
@@ -56,9 +66,9 @@ border-spacing:18px;
 
 }
 
-/* cells */
+/* header */
 
-th, td{
+th{
 
 padding:18px;
 
@@ -67,6 +77,12 @@ border-radius:16px;
 background:#f2f4f7;
 
 text-align:center;
+
+font-weight:600;
+
+font-size:16px;
+
+color:#3a3a3c;
 
 box-shadow:
 
@@ -77,9 +93,35 @@ transition:all .25s ease;
 
 }
 
-/* hover iOS feel */
+/* cell */
 
-th:hover, td:hover{
+td{
+
+padding:18px;
+
+border-radius:16px;
+
+background:#f2f4f7;
+
+text-align:center;
+
+font-weight:400;
+
+color:#1c1c1e;
+
+box-shadow:
+
+inset 2px 2px 6px rgba(0,0,0,0.08),
+inset -2px -2px 6px rgba(255,255,255,0.9);
+
+transition:all .25s ease;
+
+}
+
+/* hover effect */
+
+th:hover,
+td:hover{
 
 transform:scale(1.05);
 

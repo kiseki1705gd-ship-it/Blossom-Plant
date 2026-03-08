@@ -1,0 +1,13 @@
+[project]
+name = "plant-database"
+version = "0.1.0"
+description = "Plant Database Web Application using FastAPI"
+authors = [
+    { name = "On-an" }
+]
+
+dependencies = [
+    "fastapi",
+    "uvicorn",
+    "jinja2"
+]

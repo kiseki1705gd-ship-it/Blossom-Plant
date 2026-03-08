@@ -4,14 +4,12 @@
 <head>
 <meta charset="UTF-8">
 <title>Plant Database</title>
-
 <link rel="stylesheet" href="/static/style.css">
-
 </head>
 
 <body>
 
-<div class="container">
+<div class="card">
 
 <h1>🌱 Plant Database</h1>
 
@@ -19,20 +17,18 @@
 
 <thead>
 <tr>
-<th>ID</th>
-<th>Name</th>
+<th class="gel">ID</th>
+<th class="gel">Name</th>
 </tr>
 </thead>
 
 <tbody>
 
 {% for plant in plants %}
-
 <tr>
-<td>{{ plant.id }}</td>
-<td>{{ plant.name }}</td>
+<td class="gel">{{ plant.id }}</td>
+<td class="gel">{{ plant.name }}</td>
 </tr>
-
 {% endfor %}
 
 </tbody>

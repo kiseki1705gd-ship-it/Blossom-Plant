@@ -1,45 +1,110 @@
 body{
-    font-family: Arial, Helvetica, sans-serif;
-    background: linear-gradient(135deg,#dff5e1,#f0fff4);
-    margin:0;
-    padding:40px;
+
+    font-family: Arial;
+
+    background:#e9edf2;
+
+    height:100vh;
+
+    display:flex;
+    align-items:center;
+    justify-content:center;
+
 }
 
-.container{
-    max-width:900px;
-    margin:auto;
-    background:white;
-    padding:30px;
-    border-radius:12px;
-    box-shadow:0 10px 25px rgba(0,0,0,0.1);
+/* container */
+
+.card{
+
+    width:750px;
+
+    padding:40px;
+
+    border-radius:30px;
+
+    background:#eef2f6;
+
+    box-shadow:
+        20px 20px 60px #cfd4da,
+        -20px -20px 60px #ffffff;
+
 }
 
 h1{
     text-align:center;
-    color:#2e7d32;
     margin-bottom:30px;
 }
 
+/* table */
+
 table{
+
     width:100%;
-    border-collapse:collapse;
-    table-layout: fixed;
+
+    border-collapse:separate;
+
+    border-spacing:20px;
+
 }
 
-th, td{
-    padding:12px;
+/* jelly element */
+
+.gel{
+
+    padding:16px;
+
+    border-radius:20px;
+
+    background:#eef2f6;
+
     text-align:center;
+
+    box-shadow:
+
+        inset 3px 3px 8px rgba(0,0,0,0.08),
+        inset -3px -3px 8px rgba(255,255,255,0.9);
+
+    position:relative;
+
+    transition:all .4s cubic-bezier(.2,1.8,.4,1);
+
 }
 
-th{
-    background:#2e7d32;
-    color:white;
+/* liquid highlight */
+
+.gel::after{
+
+    content:"";
+
+    position:absolute;
+
+    top:4px;
+    left:10px;
+    right:10px;
+    height:40%;
+
+    border-radius:20px;
+
+    background:linear-gradient(
+        to bottom,
+        rgba(255,255,255,0.9),
+        rgba(255,255,255,0)
+    );
+
+    opacity:.7;
+
 }
 
-td{
-    border-bottom:1px solid #eee;
-}
+/* jelly hover */
 
-tr:hover{
-    background:#f5fff6;
+.gel:hover{
+
+    transform:scale(1.1);
+
+    box-shadow:
+
+        inset 6px 6px 12px rgba(0,0,0,0.15),
+        inset -6px -6px 12px rgba(255,255,255,1),
+        0 10px 20px rgba(0,0,0,0.15);
+
 }

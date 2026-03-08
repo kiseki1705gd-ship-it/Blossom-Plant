@@ -2,38 +2,47 @@
 <html lang="th">
 
 <head>
+
 <meta charset="UTF-8">
-<title>ฐานข้อมูลพืช</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Plant Database</title>
+
 <link rel="stylesheet" href="/static/style.css">
+
 </head>
 
 <body>
 
-<div class="card">
+<div class="container">
 
-<h1>🌱 ฐานข้อมูลพืช</h1>
+<div class="title">
+Plant Database
+</div>
+
+<div class="buttons">
+
+<div class="btn">ID</div>
+<div class="btn">Name</div>
+
+</div>
+
+<div class="table-box">
 
 <table>
 
-<thead>
-<tr>
-<th>รหัส</th>
-<th>ชื่อพืช</th>
-</tr>
-</thead>
-
-<tbody>
-
 {% for plant in plants %}
+
 <tr>
 <td>{{ plant.id }}</td>
 <td>{{ plant.name }}</td>
 </tr>
+
 {% endfor %}
 
-</tbody>
-
 </table>
+
+</div>
 
 </div>
 

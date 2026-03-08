@@ -1,5 +1,7 @@
 body{
 
+margin:0;
+
 font-family:
 "Sukhumvit Set",
 -apple-system,
@@ -8,127 +10,118 @@ BlinkMacSystemFont,
 system-ui,
 sans-serif;
 
-background:#f2f4f7;
-
-height:100vh;
+background:linear-gradient(180deg,#f2f2f7,#e5e5ea);
 
 display:flex;
-align-items:center;
+justify-content:center;
+padding:60px;
+
+}
+
+/* container */
+
+.container{
+width:760px;
+}
+
+/* title */
+
+.title{
+
+background:rgba(255,255,255,0.6);
+
+backdrop-filter:blur(20px);
+
+text-align:center;
+
+font-size:48px;
+
+font-weight:600;
+
+padding:25px;
+
+border-radius:40px;
+
+margin-bottom:30px;
+
+box-shadow:0 8px 20px rgba(0,0,0,0.08);
+
+}
+
+/* buttons */
+
+.buttons{
+
+display:flex;
+
 justify-content:center;
 
-margin:0;
+gap:120px;   /* ทำให้ ID กับ Name ห่างกัน */
+
+margin-bottom:30px;
 
 }
 
-/* กล่องหลัก */
+/* liquid glass button */
 
-.card{
+.btn{
 
-width:720px;
+background:rgba(255,255,255,0.5);
 
-padding:40px;
+backdrop-filter:blur(18px);
 
-border-radius:28px;
+padding:12px 36px;
 
-background:#f2f4f7;
+border-radius:30px;
+
+font-size:20px;
+
+font-weight:500;
 
 box-shadow:
-20px 20px 60px #d1d9e6,
--20px -20px 60px #ffffff;
+0 4px 12px rgba(0,0,0,0.1),
+inset 0 1px 4px rgba(255,255,255,0.8);
+
+transition:all .2s ease;
 
 }
 
-/* หัวข้อ */
+/* hover */
 
-h1{
-
-text-align:center;
-
-margin-bottom:35px;
-
-font-weight:600;
-
-color:#1c1c1e;
-
-letter-spacing:-0.3px;
-
-}
-
-/* ตาราง */
-
-table{
-
-width:100%;
-
-border-collapse:separate;
-
-border-spacing:18px;
-
-}
-
-/* header */
-
-th{
-
-padding:18px;
-
-border-radius:16px;
-
-background:#f2f4f7;
-
-text-align:center;
-
-font-weight:600;
-
-font-size:16px;
-
-color:#3a3a3c;
-
-box-shadow:
-
-inset 2px 2px 6px rgba(0,0,0,0.08),
-inset -2px -2px 6px rgba(255,255,255,0.9);
-
-transition:all .25s ease;
-
-}
-
-/* cell */
-
-td{
-
-padding:18px;
-
-border-radius:16px;
-
-background:#f2f4f7;
-
-text-align:center;
-
-font-weight:400;
-
-color:#1c1c1e;
-
-box-shadow:
-
-inset 2px 2px 6px rgba(0,0,0,0.08),
-inset -2px -2px 6px rgba(255,255,255,0.9);
-
-transition:all .25s ease;
-
-}
-
-/* hover effect */
-
-th:hover,
-td:hover{
+.btn:hover{
 
 transform:scale(1.05);
 
 box-shadow:
+0 8px 20px rgba(0,0,0,0.15);
 
-inset 4px 4px 10px rgba(0,0,0,0.12),
-inset -4px -4px 10px rgba(255,255,255,1),
-0 6px 16px rgba(0,0,0,0.15);
+}
 
+/* table box */
+
+.table-box{
+
+background:rgba(255,255,255,0.5);
+
+backdrop-filter:blur(25px);
+
+height:360px;
+
+border-radius:25px;
+
+padding:20px;
+
+box-shadow:0 10px 25px rgba(0,0,0,0.08);
+
+}
+
+/* table */
+
+table{
+width:100%;
+font-size:18px;
+}
+
+td{
+padding:10px;
 }

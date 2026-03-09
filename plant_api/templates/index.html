@@ -74,15 +74,34 @@
 </div>
 
 <script>
-document.getElementById('addPlantForm').addEventListener('submit', async (e) => {
+const form = document.getElementById('addPlantForm');
+const messageEl = document.getElementById('message');
+
+form.addEventListener('submit', handleSubmit);
+
+async function handleSubmit(e) {
   e.preventDefault();
+  clearMessage();
   
+  // Get form values
+  const id = document.getElementById('id').value.trim();
+  const name = document.getElementById('name').value.trim();
+  const scientific_name = document.getElementById('scientific_name').value.trim();
+  const biome = document.getElementById('biome').value.trim();
+  const type = document.getElementById('type').value.trim();
+
+  // Validate
+  if (!id || !name || !scientific_name || !biome || !type) {
+    showError('กรุณากรอกข้อมูลให้ครบครัน');
+    return;
+  }
+
   const plantData = {
-    id: parseInt(document.getElementById('id').value),
-    name: document.getElementById('name').value,
-    scientific_name: document.getElementById('scientific_name').value,
-    biome: document.getElementById('biome').value,
-    type: document.getElementById('type').value
+    id: parseInt(id),
+    name: name,
+    scientific_name: scientific_name,
+    biome: biome,
+    type: type
   };
 
   try {
@@ -94,38 +113,53 @@ document.getElementById('addPlantForm').addEventListener('submit', async (e) => 
       body: JSON.stringify(plantData)
     });
 
-    const messageEl = document.getElementById('message');
-    
-    if (response.ok) {
-      messageEl.textContent = '✅ เพิ่มพืชสำเร็จ!';
-      messageEl.classList.add('success');
-      messageEl.classList.remove('error');
-      document.getElementById('addPlantForm').reset();
-      setTimeout(() => location.reload(), 1200);
-    } else {
-      const error = await response.json();
-      messageEl.textContent = '❌ เกิดข้อผิดพลาด: ' + (error.detail || 'Unknown error');
-      messageEl.classList.add('error');
-      messageEl.classList.remove('success');
+    // Parse response
+    let responseData = {};
+    try {
+      responseData = await response.json();
+    } catch (e) {
+      // Response is not JSON
+      console.log('Response is not JSON');
     }
-  } catch (error) {
-    const messageEl = document.getElementById('message');
-    messageEl.textContent = '❌ เกิดข้อผิดพลาด: ' + error.message;
-    messageEl.classList.add('error');
-    messageEl.classList.remove('success');
-  }
-});
-</script>
 
-</body>
-</html>
+    // Handle response status
+    if (response.status === 200 || response.status === 201) {
+      showSuccess('✅ เพิ่มพืชสำเร็จ!');
+      form.reset();
+      setTimeout(() => window.location.reload(), 1200);
+    } else if (response.status === 422) {
+      // Validation error
+      const detail = responseData.detail || 'ข้อมูลไม่ถูกต้อง';
+      showError(detail);
+    } else if (response.status === 400) {
+      const detail = responseData.detail || 'Bad Request';
+      showError(detail);
     } else {
-      document.getElementById('message').textContent = '❌ เกิดข้อผิดพลาด';
+      showError('เกิดข้อผิดพลาด: ' + (responseData.detail || response.statusText));
     }
+
   } catch (error) {
-    document.getElementById('message').textContent = '❌ เกิดข้อผิดพลาด: ' + error.message;
+    console.error('Fetch error:', error);
+    showError('ไม่สามารถเชื่อมต่อเซิร์ฟเวอร์ได้');
   }
-});
+}
+
+function showSuccess(message) {
+  messageEl.textContent = message;
+  messageEl.classList.add('success');
+  messageEl.classList.remove('error');
+}
+
+function showError(message) {
+  messageEl.textContent = '❌ ' + message;
+  messageEl.classList.add('error');
+  messageEl.classList.remove('success');
+}
+
+function clearMessage() {
+  messageEl.textContent = '';
+  messageEl.classList.remove('success', 'error');
+}
 </script>
 
 </body>

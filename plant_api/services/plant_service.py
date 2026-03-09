@@ -17,14 +17,18 @@ class PlantService:
             plant = Flower(
                 data["id"],
                 data["name"],
-                data["scientific_name"]
+                data["scientific_name"],
+                data.get("biome", "Unknown"),
+                data.get("created_at")
             )
 
         elif data["type"] == "tree":
             plant = Tree(
                 data["id"],
                 data["name"],
-                data["scientific_name"]
+                data["scientific_name"],
+                data.get("biome", "Unknown"),
+                data.get("created_at")
             )
 
         else:

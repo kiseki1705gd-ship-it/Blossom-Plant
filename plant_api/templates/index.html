@@ -4,7 +4,7 @@
 <head>
 
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
 
 <title>Plant Database</title>
 
@@ -17,34 +17,116 @@
 <div class="container">
 
 <div class="title">
-Plant Database
+🌿 Plant Database
 </div>
 
-<div class="buttons">
-
-<div class="btn">ID</div>
-<div class="btn">Name</div>
-
+<!-- Form เพิ่มพืชใหม่ -->
+<div class="form-box">
+<h2>✨ เพิ่มพืชใหม่</h2>
+<form id="addPlantForm">
+<div class="form-row">
+<input type="number" id="id" placeholder="ID" required min="1">
+<input type="text" id="name" placeholder="ชื่อพืช" required>
+</div>
+<div class="form-row">
+<input type="text" id="scientific_name" placeholder="ชื่อวิทยาศาสตร์" required>
+<input type="text" id="biome" placeholder="ไบโอม (เช่น Tropical, Temperate)" required>
+</div>
+<div class="form-row">
+<select id="type" required>
+<option value="">เลือกประเภท</option>
+<option value="flower">🌸 Flower (ดอกไม้)</option>
+<option value="tree">🌲 Tree (ต้นไม้)</option>
+</select>
+<button type="submit" class="btn btn-submit">✨ เพิ่มพืช</button>
+</div>
+</form>
+<div id="message" class="message"></div>
 </div>
 
+<!-- ตารางแสดงข้อมูลพืช -->
 <div class="table-box">
-
+<h2>📊 รายการพืชทั้งหมด</h2>
 <table>
-
-{% for plant in plants %}
-
+<thead>
 <tr>
-<td>{{ plant.id }}</td>
-<td>{{ plant.name }}</td>
+<th>ID</th>
+<th>ชื่อพืช</th>
+<th>ชื่อวิทยาศาสตร์</th>
+<th>ไบโอม</th>
+<th>วันที่เพิ่ม</th>
 </tr>
-
+</thead>
+<tbody>
+{% for plant in plants %}
+<tr>
+<td><strong>{{ plant.id }}</strong></td>
+<td>{{ plant.name }}</td>
+<td><em>{{ plant.scientific_name }}</em></td>
+<td><span class="badge">{{ plant.biome }}</span></td>
+<td>{{ plant.created_at[:10] }}</td>
+</tr>
 {% endfor %}
-
+</tbody>
 </table>
-
 </div>
 
 </div>
+
+<script>
+document.getElementById('addPlantForm').addEventListener('submit', async (e) => {
+  e.preventDefault();
+  
+  const plantData = {
+    id: parseInt(document.getElementById('id').value),
+    name: document.getElementById('name').value,
+    scientific_name: document.getElementById('scientific_name').value,
+    biome: document.getElementById('biome').value,
+    type: document.getElementById('type').value
+  };
+
+  try {
+    const response = await fetch('/plants', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(plantData)
+    });
+
+    const messageEl = document.getElementById('message');
+    
+    if (response.ok) {
+      messageEl.textContent = '✅ เพิ่มพืชสำเร็จ!';
+      messageEl.classList.add('success');
+      messageEl.classList.remove('error');
+      document.getElementById('addPlantForm').reset();
+      setTimeout(() => location.reload(), 1200);
+    } else {
+      const error = await response.json();
+      messageEl.textContent = '❌ เกิดข้อผิดพลาด: ' + (error.detail || 'Unknown error');
+      messageEl.classList.add('error');
+      messageEl.classList.remove('success');
+    }
+  } catch (error) {
+    const messageEl = document.getElementById('message');
+    messageEl.textContent = '❌ เกิดข้อผิดพลาด: ' + error.message;
+    messageEl.classList.add('error');
+    messageEl.classList.remove('success');
+  }
+});
+</script>
+
+</body>
+</html>
+    } else {
+      document.getElementById('message').textContent = '❌ เกิดข้อผิดพลาด';
+    }
+  } catch (error) {
+    document.getElementById('message').textContent = '❌ เกิดข้อผิดพลาด: ' + error.message;
+  }
+});
+</script>
 
 </body>
 </html>
